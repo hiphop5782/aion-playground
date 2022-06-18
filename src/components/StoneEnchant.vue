@@ -1,11 +1,11 @@
 <template>
 <div>
-    <h1>아이템 추출</h1>
+    <h1>마석 강화</h1>
 </div>
 </template>
 <script>
 export default {
-    name:"ItemExtraction",
+    name:"StoneEnchant",
 };
 </script>
 <style>
