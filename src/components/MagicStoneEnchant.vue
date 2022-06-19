@@ -122,7 +122,6 @@
 </div>
 </template>
 <script>
-import Vue from "vue";
 export default {
     name:"MagicStoneEnchant",
     data(){
@@ -223,11 +222,12 @@ export default {
             if(result){
 
                 if(!this.socketList[this.enchant.success].result){
-                    Vue.set(this.socketList, this.enchant.success, {name:this.enchantStone.name, result:true});
+                    this.socketList[this.enchant.success].name = this.enchantStone.name;
+                    this.socketList[this.enchant.success].result = true;
                 }
-                Vue.set(this.enchant, "result", true);
-                Vue.set(this.enchant, "success", this.enchant.success + 1);
-                Vue.set(this.result, "success", this.result.success + 1);
+                this.enchant.result = true;
+                this.enchant.success++;
+                this.result.success++;
 
                 // if(this.socketList[this.socketList.length-1]){
                 // }
