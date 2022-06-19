@@ -1,0 +1,610 @@
+[
+    {
+        "name": "몰락한 고대신의 판금 흉갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "판금",
+        "code": "110600509",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 판금 각반",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "판금",
+        "code": "113600476",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 판금 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "판금",
+        "code": "112600461",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 판금 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "판금",
+        "code": "111600480",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 판금 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "판금",
+        "code": "114600466",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 사슬 갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "사슬",
+        "code": "110500514",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 사슬 다리갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "사슬",
+        "code": "113500492",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 사슬 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "사슬",
+        "code": "112500456",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 사슬 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "사슬",
+        "code": "111500493",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 사슬 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "사슬",
+        "code": "114500499",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 가죽 조끼",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "가죽",
+        "code": "110300536",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 가죽 다리보호대",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "가죽",
+        "code": "113300519",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 가죽 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "가죽",
+        "code": "112300468",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 가죽 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "가죽",
+        "code": "111300506",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 가죽 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "가죽",
+        "code": "114300533",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 로브 상의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "로브",
+        "code": "110100575",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 로브 하의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "로브",
+        "code": "113100503",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 로브 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "로브",
+        "code": "112100468",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 로브 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "로브",
+        "code": "111100504",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 로브 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "로브",
+        "code": "114100520",
+        "trade": true
+    },
+
+    {
+        "name": "아누하르트 수호성의 판금 흉갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "판금",
+        "code": "110500869",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 수호성의 판금 각반",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "판금",
+        "code": "113600835",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 수호성의 판금 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "판금",
+        "code": "112600820",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 수호성의 판금 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "판금",
+        "code": "111600846",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 수호성의 판금 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "판금",
+        "code": "114600829",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 검성의 판금 흉갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "판금",
+        "code": "110600869",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 검성의 판금 각반",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "판금",
+        "code": "113600834",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 검성의 판금 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "판금",
+        "code": "112600819",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 검성의 판금 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "판금",
+        "code": "111600845",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 검성의 판금 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "판금",
+        "code": "114600828",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 호법성의 사슬 갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "사슬",
+        "code": "110500886",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 호법성의 사슬 다리갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "사슬",
+        "code": "113500860",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 호법성의 사슬 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "사슬",
+        "code": "112500809",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 호법성의 사슬 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "사슬",
+        "code": "111500858",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 호법성의 사슬 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "사슬",
+        "code": "114500870",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 치유성의 사슬 갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "사슬",
+        "code": "110500885",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 치유성의 사슬 다리갑옷",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "사슬",
+        "code": "113500860",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 치유성의 사슬 견갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "사슬",
+        "code": "112500809",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 치유성의 사슬 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "사슬",
+        "code": "111500858",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 치유성의 사슬 장화",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "사슬",
+        "code": "114500870",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 살성의 가죽 조끼",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "가죽",
+        "code": "110300917",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 살성의 가죽 다리보호대",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "가죽",
+        "code": "113300893",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 살성의 가죽 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "가죽",
+        "code": "112300817",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 살성의 가죽 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "가죽",
+        "code": "111300867",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 살성의 가죽 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "가죽",
+        "code": "114300926",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 궁성의 가죽 조끼",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "가죽",
+        "code": "110300918",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 궁성의 가죽 다리보호대",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "가죽",
+        "code": "113300894",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 궁성의 가죽 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "가죽",
+        "code": "112300818",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 궁성의 가죽 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "가죽",
+        "code": "111300868",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 궁성의 가죽 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "가죽",
+        "code": "114300927",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 마도성의 로브 상의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "로브",
+        "code": "110100972",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 마도성의 로브 하의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "로브",
+        "code": "113100876",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 마도성의 로브 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "로브",
+        "code": "112100823",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 마도성의 로브 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "로브",
+        "code": "111100866",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 마도성의 로브 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "로브",
+        "code": "114100901",
+        "trade": false
+    },
+
+    {
+        "name": "아누하르트 정령성의 로브 상의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "상의",
+        "extraType": "로브",
+        "code": "110100973",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정령성의 로브 하의",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "하의",
+        "extraType": "로브",
+        "code": "113100877",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정령성의 로브 어깨보호구",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "어깨",
+        "extraType": "로브",
+        "code": "112100824",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정령성의 로브 장갑",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "장갑",
+        "extraType": "로브",
+        "code": "111100867",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정령성의 로브 신발",
+        "level": 50,
+        "grade": "유일",
+        "type": "방어구",
+        "subType": "신발",
+        "extraType": "로브",
+        "code": "114100902",
+        "trade": false
+    }
+]

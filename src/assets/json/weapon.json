@@ -1,0 +1,298 @@
+[
+    {
+        "name": "몰락한 고대신의 양손검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "양손검",
+        "code": "100900235",
+        "trade": true
+    }, {
+        "name": "몰락한 고대신의 검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000318",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 단도",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200339",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 마법서",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "법서",
+        "code": "100600258",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 보옥",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "보옥",
+        "code": "100500242",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 장궁",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "활",
+        "code": "101700256",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 전투망치",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "전곤",
+        "code": "100100231",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 지팡이",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "지팡이",
+        "code": "101500583",
+        "trade": true
+    },
+    {
+        "name": "몰락한 고대신의 창",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "창",
+        "code": "101300232",
+        "trade": true
+    },
+    {
+        "name": "아누하르트 정예병의 마법서",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "법서",
+        "code": "100600635",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 보옥",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "보옥",
+        "code": "100500601",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 비늘검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000765",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 비수",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200701",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 양손검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "양손검",
+        "code": "100900590",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 역린검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000766",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 장궁",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "활",
+        "code": "101700619",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 전투망치",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "전곤",
+        "code": "100100580",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 지팡이",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "지팡이",
+        "code": "101500604",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 창",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "창",
+        "code": "101300563",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 창린검",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000767",
+        "trade": false
+    },
+    {
+        "name": "아누하르트 정예병의 단도",
+        "level": 50,
+        "grade": "유일",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200700",
+        "trade": false
+    },
+    {
+        "name": "루드라의 창린검",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000893",
+        "trade": false
+    },
+    {
+        "name": "루드라의 비늘검",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100001080",
+        "trade": false
+    },
+    {
+        "name": "루드라의 단도",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200807",
+        "trade": false
+    },
+    {
+        "name": "루드라의 전투망치",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "전곤",
+        "code": "100100676",
+        "trade": false
+    },
+    {
+        "name": "루드라의 장궁",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "활",
+        "code": "101700722",
+        "trade": false
+    },
+    {
+        "name": "루드라의 지팡이",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "지팡이",
+        "code": "101500698",
+        "trade": false
+    },
+    {
+        "name": "루드라의 창",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "창",
+        "code": "101300655",
+        "trade": false
+    },
+    {
+        "name": "루드라의 양손검",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "양손검",
+        "code": "100900684",
+        "trade": false
+    },
+    {
+        "name": "루드라의 보옥",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "보옥",
+        "code": "100500698",
+        "trade": false
+    },
+    {
+        "name": "루드라의 마법서",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "법서",
+        "code": "100600755",
+        "trade": false
+    },
+    {
+        "name": "플라나스의 단도",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200954",
+        "trade": false
+    },
+    {
+        "name": "플라나스의 검",
+        "level": 55,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100001081",
+        "trade": false
+    }
+]
