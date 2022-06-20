@@ -26,11 +26,7 @@
         <div class="col-md-9">
             <select v-model.number="socketCount" class="form-control">
                 <option value="">선택하세요</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
+                <option v-for="count in availableSocketCountList" :key="count">{{count}}</option>
             </select>
         </div>
     </div>
@@ -80,30 +76,30 @@
         <div class="col-md-10 offset-md-1 text-center">
             (
                 <span style="color:black;">
-                총 {{result.total}} 
+                총 {{result.total}} 회 시도
                 </span>
                 / 
                 <span style="color:blue;">
-                성공 {{result.success}}
+                성공 {{result.success}} 회
                 </span> 
                 /
                 <span style="color:red">
-                실패 {{result.fail}}
+                실패 {{result.fail}} 회
                 </span>
             )
         </div>
     </div>
     <div class="row mt-1" v-if="selectFinish">
         <div class="col-md-10 offset-md-1 text-center">
-            <button class="btn btn-outline-secondary" @click="clearEnchantProgress();">초기화</button>
-            <button class="btn btn-outline-warning ms-1" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
+            <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
+            <button class="btn btn-warning ms-1" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
         </div>
     </div>
     <div class="row mt-1" v-if="selectFinish">
         <div class="col-md-10 offset-md-1 text-center">
-            <button class="btn btn-outline-danger ms-1" @click="multipleEnchantProgress(10);">10연속</button>
-            <button class="btn btn-outline-danger ms-1" @click="multipleEnchantProgress(100);">100연속</button>
-            <button class="btn btn-outline-danger ms-1" @click="multipleEnchantProgress(1000);">1000연속</button>
+            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10연속</button>
+            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100연속</button>
+            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000연속</button>
         </div>
     </div>
 
@@ -176,6 +172,14 @@ export default {
          enchantStone(){
             return this.stoneList[this.enchant.stone];
          },
+         availableSocketCountList(){
+            if(!this.choice) return null;
+            switch(this.choice.grade){
+                case "유일": return [4, 5, 6];
+                case "영웅": return [5, 6];
+            }
+            return null;
+         },
     },
     methods:{
         clearEnchantProgress(){
@@ -218,8 +222,10 @@ export default {
 
             const result = this.enchantProgress(1);
 
-            this.result.total++;
             if(result){
+
+                if(!this.socketList[this.enchant.success])
+                    throw "강화 완료";
 
                 if(!this.socketList[this.enchant.success].result){
                     this.socketList[this.enchant.success].name = this.enchantStone.name;
@@ -241,6 +247,8 @@ export default {
                 this.enchant.success = 0;
                 this.result.fail++;
             }
+
+            this.result.total++;
         },
         calculateEnchantRate(grade){
             switch(grade){
@@ -263,6 +271,9 @@ export default {
             }
 
             this.enchant.clear();
+        },
+        choice(){
+            this.socketCount = this.availableSocketCountList[0];
         },
     },
     created:function(){
