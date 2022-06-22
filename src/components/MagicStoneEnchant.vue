@@ -85,7 +85,7 @@
     </div>
 
     <div class="row mt-3" v-if="selectFinish">
-        <div class="col-md-10 offset-md-1 text-center">
+        <div class="col-md-10 offset-md-1 result-wrapper">
             (
                 <span style="color:black;">
                 총 {{result.total}} 회 시도
@@ -379,6 +379,9 @@ export default {
     .progress-wrapper{
         background-color: white;
     }
+    .result-wrapper {
+        text-align: center;
+    }
     @media screen and (max-width:640px){
         .stone-item-wrapper {
             height:20vh;
@@ -405,6 +408,9 @@ export default {
             right:0;
             bottom: 0;
             height:10px;
+        }
+        .result-wrapper {
+            text-align: left;
         }
     }
 </style>
