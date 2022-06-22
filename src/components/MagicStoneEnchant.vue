@@ -2,32 +2,44 @@
 <div class="container-fluid">
     <div class="mt-3 p-4 text-light bg-dark rounded">
         <h2>마석 강화 시뮬레이션</h2>
+        <p>성공 확률 - 유일 70%, 영웅 60%</p>
     </div>
     
     <div class="row mt-3">
         <label class="col-form-label col-md-3">
             아이템 선택
         </label>
-        <div class="col-md-9">
-            <!--
-            <input type="text" class="form-control" v-model="keyword" @input="keyword = $event.target.value">
-            -->
+        <div class="col-md-9 position-relative">
+            <item-search-bar :data-list="itemList" @select-item="selectItem"></item-search-bar>
+
+            <!-- <div class="datalist">
+                <div class="datalist-item row" v-for="(item, index) in itemList" :key="index" @click="keyword = index">
+                    <div class="col-3">{{item.grade}}</div>
+                    <div class="col-9">{{item.name}}</div>
+                </div>
+            </div> -->
+
+            <!--             
             <select class="form-select" v-model="keyword">
                 <option value="">선택하세요</option>
                 <option v-for="(item, index) in itemList" :value="index" :key="index">{{item.name}}</option>
             </select>
+             -->
         </div>
     </div>
 
-    <div class="row mt-3">
+    <div class="row mt-3" v-if="choice != null">
         <label class="col-form-label col-md-3">
             소켓 선택
         </label>
-        <div class="col-md-9">
-            <select v-model.number="socketCount" class="form-control">
+        <div class="col-md-9 d-flex">
+            <!-- <select v-model.number="socketCount" class="form-control">
                 <option value="">선택하세요</option>
                 <option v-for="count in availableSocketCountList" :key="count">{{count}}</option>
-            </select>
+            </select> -->
+            <label v-for="count in availableSocketCountList" :key="count" class="flex-grow-1">
+                <input type="radio" class="form-check-input" v-model.number="socketCount" :value="count"> {{count}}소켓
+            </label>
         </div>
     </div>
 
@@ -59,8 +71,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 d-flex flex-wrap align-items-center mb-3">
-            <div class="stone-item col-6" v-for="(stone, index) in stoneList" :key="index">
+        <div class="col-md-6 d-flex flex-wrap align-items-center mb-3 stone-item-wrapper">
+            <div class="stone-item" v-for="(stone, index) in stoneList" :key="index">
                 <label class="d-block">
                     <input type="radio" name="stone" :value="index" class="d-none" v-model="enchant.stone">
                     <div>
@@ -89,21 +101,15 @@
             )
         </div>
     </div>
-    <div class="row mt-1" v-if="selectFinish">
-        <div class="col-md-10 offset-md-1 text-center">
-            <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
-            <button class="btn btn-warning ms-1" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
-        </div>
-    </div>
-    <div class="row mt-1" v-if="selectFinish">
-        <div class="col-md-10 offset-md-1 text-center">
-            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10연속</button>
-            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100연속</button>
-            <button class="btn btn-danger ms-1" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000연속</button>
-        </div>
+    <div class="button-wrapper" v-if="selectFinish">
+        <button class="btn btn-danger" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10회</button>
+        <button class="btn btn-danger" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100회</button>
+        <button class="btn btn-danger" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000회</button>
+        <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
+        <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
     </div>
 
-    <div class="row mt-4" style="height:60px">
+    <div class="row mt-4 progress-wrapper" style="height:60px">
         <div class="col-md-10 offset-md-1" v-if="enchant.progress">
             <div class="progress">
                 <div class="progress-bar" role="progressbar" :style="{width: enchant.progress + '%'}"
@@ -118,8 +124,11 @@
 </div>
 </template>
 <script>
+import ItemSearchBar from "./search/ItemSearchBar.vue";
+
 export default {
     name:"MagicStoneEnchant",
+    components:{ItemSearchBar},
     data(){
         return {
             keyword:"",
@@ -145,7 +154,10 @@ export default {
                 total:0,
                 success:0,
                 fail:0
-            }
+            },
+
+            choice : null,
+
         };
     },
     computed:{
@@ -160,14 +172,15 @@ export default {
             else
                 return "마석 강화 실패";
          },
-         choice(){
-            return this.keyword >= 0 ? this.itemList[this.keyword] : null;
+         choiceItemName(){
+            if(!this.choice) return "";
+            return "["+this.choice.grade+"] " + this.choice.name;
          },
          isEnchantFinished(){
             return this.enchant && this.enchant.success == this.socketCount;
          },
          enchantButtonLabel(){
-            return this.isEnchantFinished ? "강화 완료" : "마석 강화";
+            return this.isEnchantFinished ? "완료" : "강화";
          },
          enchantStone(){
             return this.stoneList[this.enchant.stone];
@@ -262,6 +275,9 @@ export default {
                 this.afterEnchantProgress();
             }
         },
+        selectItem(item){
+            this.choice = item;
+        },
     },
     watch:{
         socketCount(){
@@ -280,6 +296,10 @@ export default {
         this.itemList.push(...require("@/assets/json/weapon.json"));
         this.itemList.push(...require("@/assets/json/armor.json"));
         this.stoneList.push(...require("@/assets/json/magicstone.json"));
+    },
+    mounted:function(){
+        
+       
     },
 };
 </script>
@@ -334,5 +354,57 @@ export default {
     input[name=stone]:checked ~ div {
         color:red;
         border:2px solid red;
+    }
+    .stone-item-wrapper {
+        overflow-y: auto;
+    }
+    .stone-item-wrapper::-webkit-scrollbar {
+        width:1px;
+    }
+    .stone-item-wrapper > .stone-item {
+        width:50%;
+    }
+    .stone-item-wrapper > .stone-item > label {
+        cursor:pointer;
+    }
+    .button-wrapper {
+        margin : 10px 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+    }
+    .button-wrapper > button:not(:first-child){
+        margin: 0 0 0 10px;
+    }
+    .progress-wrapper{
+        background-color: white;
+    }
+    @media screen and (max-width:640px){
+        .stone-item-wrapper {
+            height:20vh;
+        }
+        .stone-item-wrapper > .stone-item {
+            width:100%;
+        }
+        .button-wrapper {
+            position: fixed;
+            bottom:65px;
+            right:0;
+            display:flex;
+            flex-direction: column;
+        }
+        .button-wrapper > button {
+            width:85px;
+        }
+        .button-wrapper > button:not(:first-child) {
+            margin: 10px 0 0 0;       
+        }
+        .progress-wrapper {
+            position: fixed;
+            left:0;
+            right:0;
+            bottom: 0;
+            height:10px;
+        }
     }
 </style>
