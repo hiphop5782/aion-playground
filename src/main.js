@@ -12,8 +12,11 @@ import "bootswatch/dist/litera/bootstrap.min.css";
 
 import FontAwesomeIcon from './font-awesome/index.js';
 
-const app = createApp(App);
-app.component("font-awesome-icon", FontAwesomeIcon);
-app.use(router);
-app.use(store);
-app.mount('#app');
+import { createMetaManager } from 'vue-meta';
+
+createApp(App)
+    .component("font-awesome-icon", FontAwesomeIcon)
+    .use(router)
+    .use(store)
+    .use(createMetaManager())
+    .mount('#app');

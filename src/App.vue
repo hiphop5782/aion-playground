@@ -26,8 +26,19 @@
 </template>
 
 <script>
+  import {useMeta} from "vue-meta";
   export default {
     name: 'App',
+    setup(){
+      //setting meta information
+      useMeta({
+        title:"Aion Playground",
+        meta:[
+          //<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+          {"http-equiv":"Content-Security-Policy", "content":"upgrade-insecure-requests"},
+        ],
+      });
+    },
     data(){
       return {
         menuList:[
