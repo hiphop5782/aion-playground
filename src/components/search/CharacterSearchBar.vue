@@ -62,9 +62,10 @@ export default {
         },
         selectData(index){
             this.click = true;
-            this.keyword = this.filterList[index].name;
+            const name = this.filterList[index].name;
             this.$emit("select-item", this.filterList[index]);
             this.filterList = [];
+            this.keyword = name;
         },
     },
     created(){

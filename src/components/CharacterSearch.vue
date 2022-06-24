@@ -30,101 +30,112 @@
         <div class="row mt-4" v-if="userDetail">
             <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                물리 공격력
-                                <span class="badge rounded-pill" :class="calculatePhysical(userDetail.character_stats.totalStat.physicalRight)">
-                                    {{userDetail.character_stats.totalStat.physicalRight}}
+                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-bold"
+                                    v-for="(item, index) in userDetail.character_equipments" :key="index">
+                                <span :class="item.quality">
+                                    <img :src="item.image" width="24">
+                                    {{item.name}}
                                 </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                명중
-                                <span class="badge rounded-pill" :class="calculateAccuracy(userDetail.character_stats.totalStat.accuracyRight)">
-                                    {{userDetail.character_stats.totalStat.accuracyRight}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                물리 치명타
-                                <span class="badge rounded-pill" :class="calculateCritical(userDetail.character_stats.totalStat.criticalRight)">
-                                    {{userDetail.character_stats.totalStat.criticalRight}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                마법 증폭력
-                                <span class="badge rounded-pill" :class="calculateMagicalBoost(userDetail.character_stats.totalStat.magicalBoost)">
-                                    {{userDetail.character_stats.totalStat.magicalBoost}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                마법 적중
-                                <span class="badge rounded-pill" :class="calculateMagicalAccuracy(userDetail.character_stats.totalStat.magicalAccuracy)">
-                                    {{userDetail.character_stats.totalStat.magicalAccuracy}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                마법 치명타
-                                <span class="badge rounded-pill" :class="calculateMagicalCritical(userDetail.character_stats.totalStat.magicalCriticalRight)">
-                                    {{userDetail.character_stats.totalStat.magicalCriticalRight}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                생명력
-                                <span class="badge bg-light text-danger rounded-pill">
-                                    {{userDetail.character_stats.totalStat.hp}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                정신력
-                                <span class="badge bg-light text-primary rounded-pill">
-                                    {{userDetail.character_stats.totalStat.mp}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                마법 저항
-                                <span class="badge rounded-pill" :class="calculateMagicResist(userDetail.character_stats.totalStat.magicResist)">
-                                    {{userDetail.character_stats.totalStat.magicResist}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                방패 방어
-                                <span class="badge rounded-pill" :class="calculateBlock(userDetail.character_stats.totalStat.block)">
-                                    {{userDetail.character_stats.totalStat.block}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                무기 방어
-                                <span class="badge bg-primary rounded-pill">
-                                    {{userDetail.character_stats.totalStat.block}}
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                PvP 공격력
-                                <span class="badge bg-primary rounded-pill">
-                                    20%
-                                </span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                PvP 방어력
-                                <span class="badge bg-primary rounded-pill">
-                                    20%
-                                </span>
+                                <span class="badge rounded-pill fw-bold" :class="calculateEnchantcount(item.enchantCount)" v-show="item.enchantCount > 0">+{{item.enchantCount}}</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-5">
+
+                    <div class="col-md-3">
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
-                                    v-for="(item, index) in userDetail.character_equipments" :key="index">
-                                <span :class="item.quality">{{item.name}}</span>
-                                <span class="badge rounded-pill" :class="calculateEnchantcount(item.enchantCount)" v-show="item.enchantCount > 0">+{{item.enchantCount}}</span>
+                            <li v-if="isPhysicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                물리 공격력
+                                <span class="badge rounded-pill fw-bold" :class="calculatePhysical(userDetail.character_stats.totalStat.physicalRight)">
+                                    {{userDetail.character_stats.totalStat.physicalRight}}
+                                </span>
+                            </li>
+                            <li v-if="isPhysicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                명중
+                                <span class="badge rounded-pill fw-bold" :class="calculateAccuracy(userDetail.character_stats.totalStat.accuracyRight)">
+                                    {{userDetail.character_stats.totalStat.accuracyRight}}
+                                </span>
+                            </li>
+                            <li v-if="isPhysicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                물리 치명타
+                                <span class="badge rounded-pill fw-bold" :class="calculateCritical(userDetail.character_stats.totalStat.criticalRight)">
+                                    {{userDetail.character_stats.totalStat.criticalRight}}
+                                </span>
+                            </li>
+                            <li v-if="isMagicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                마법 증폭력
+                                <span class="badge rounded-pill fw-bold" :class="calculateMagicalBoost(userDetail.character_stats.totalStat.magicalBoost)">
+                                    {{userDetail.character_stats.totalStat.magicalBoost}}
+                                </span>
+                            </li>
+                            <li v-if="isMagicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                마법 적중
+                                <span class="badge rounded-pill fw-bold" :class="calculateMagicalAccuracy(userDetail.character_stats.totalStat.magicalAccuracy)">
+                                    {{userDetail.character_stats.totalStat.magicalAccuracy}}
+                                </span>
+                            </li>
+                            <li v-if="isMagicalClass(user.jobName) || isHybridClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                마법 치명타
+                                <span class="badge rounded-pill fw-bold" :class="calculateMagicalCritical(userDetail.character_stats.totalStat.magicalCriticalRight)">
+                                    {{userDetail.character_stats.totalStat.magicalCriticalRight}}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                생명력
+                                <span class="badge bg-light text-danger rounded-pill fw-bold">
+                                    {{userDetail.character_stats.totalStat.hp}}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                정신력
+                                <span class="badge bg-light text-primary rounded-pill fw-bold">
+                                    {{userDetail.character_stats.totalStat.mp}}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                마법 저항
+                                <span class="badge rounded-pill fw-bold" :class="calculateMagicResist(userDetail.character_stats.totalStat.magicResist)">
+                                    {{userDetail.character_stats.totalStat.magicResist}}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                회피
+                                <span class="badge rounded-pill fw-bold" :class="calculateDodge(userDetail.character_stats.totalStat.dodge)">
+                                    {{userDetail.character_stats.totalStat.dodge}}
+                                </span>
+                            </li>
+                            <li v-if="!isTwohandClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                방패 방어
+                                <span class="badge rounded-pill fw-bold" :class="calculateBlock(userDetail.character_stats.totalStat.block)">
+                                    {{userDetail.character_stats.totalStat.block}}
+                                </span>
+                            </li>
+                            <li v-if="isTwohandClass(user.jobName)" class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                무기 방어
+                                <span class="badge bg-light rounded-pill fw-bold">
+                                    {{userDetail.character_stats.totalStat.parry}}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                PvP 공격력
+                                <span class="badge bg-primary rounded-pill fw-bold">
+                                    ??%
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                PvP 방어력
+                                <span class="badge bg-primary rounded-pill fw-bold">
+                                    ??%
+                                </span>
                             </li>
                         </ul>
                     </div>
                     
+                    
                     <div class="col-md-3">
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" v-for="(stigma, index) in userDetail.character_stigma" :key="index">
+                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-bold" v-for="(stigma, index) in userDetail.character_stigma" :key="index">
                                 <span :class="stigma.quality">{{stigma.name}}</span>
                             </li>
                         </ul>
@@ -174,13 +185,13 @@
             },
             //마법증폭력 충족도 계산
             calculateMagicalBoost(value){
-                if(value >= 2350) return "bg-danger"
-                else if(value >= 2200) return "bg-warning";
+                if(value >= 2400) return "bg-danger"
+                else if(value >= 2100) return "bg-warning";
                 return "bg-light";
             },
             //마법적중 충족도 계산
             calculateMagicalAccuracy(value){
-                if(value >= 1700) return "bg-danger"
+                if(value >= 1650) return "bg-danger"
                 else if(value >= 1450)  return "bg-warning";
                 return "bg-light";
             },
@@ -226,6 +237,41 @@
                 else if(value >= 10) return "bg-warning";
                 return "bg-light";
             },
+            calculateDodge(value){
+                if(value >= 2200) return "bg-danger";
+                else if(value >= 1900) return "bg-warning";
+                return "bg-light";
+            },
+
+            //타입 판정
+            isMagicalClass(classType){
+                switch(classType){
+                    case "마도성": case "정령성": case "치유성":
+                        return true;
+                }
+                return false;
+            },
+            isPhysicalClass(classType){
+                switch(classType){
+                    case "수호성": case "검성":
+                        return true;
+                }
+                return false;
+            },
+            isHybridClass(classType){
+                switch(classType){
+                    case "궁성": case "살성": case "호법성":
+                        return true;
+                }
+                return false;
+            },
+            isTwohandClass(classType){
+                switch(classType){
+                    case "마도성": case "정령성": case "궁성": case "호법성":
+                        return true;
+                }
+                return false;
+            },
         },
         created() {
             
@@ -240,5 +286,18 @@
         .list-group > .list-group-item {
             font-size: 1.2em;
         }
+    }
+    .epic {
+        color:rgb(255, 128, 51);
+    }
+    .unique {
+        /* color:rgb(255, 193, 3); */
+        color:#e8af00;
+    }
+    .legend {
+        color:rgb(64, 167, 206);
+    }
+    .rare {
+        color:rgb(84, 175, 81);
     }
 </style>
