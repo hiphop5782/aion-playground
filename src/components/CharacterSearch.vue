@@ -21,7 +21,7 @@
                     @click="goHomepage(user.serverId, user.characterId);">{{user.characterName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{user.serverName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{user.jobName}}</a>
-                <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom"
+                <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom" v-if="user.guildName"
                     @click.prevent="goGuild(user.serverId, user.guildId);">{{user.guildName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{userDetail.character_abyss.rankName}}</a>
             </div>
@@ -119,14 +119,15 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
                                 PvP 공격력
-                                <span class="badge bg-primary rounded-pill fw-bold">
-                                    ??%
+                                <span v-if="userDetail.pvpAttackRate" class="badge rounded-pill fw-bold" :class="calculatePvpAttack(userDetail.pvpAttackRate)">
+                                    {{userDetail.pvpAttackRate.toFixed(1)}}%
+                                    <span v-if="isTwohandClass(user.jobName)"> + &alpha;</span>
                                 </span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
                                 PvP 방어력
-                                <span class="badge bg-primary rounded-pill fw-bold">
-                                    ??%
+                                <span v-if="userDetail.pvpDefenceRate" class="badge rounded-pill fw-bold" :class="calculatePvpDefence(userDetail.pvpDefenceRate)">
+                                    {{userDetail.pvpDefenceRate.toFixed(1)}}%
                                 </span>
                             </li>
                         </ul>
@@ -159,9 +160,12 @@
             return {
                 user: null,
                 userDetail: null,
+                pvpStats:{},
             };
         },
-        watch: {},
+        watch: {
+            
+        },
         methods: {
             async selectItem(user) {
                 const [userRequest] = await Promise.all([
@@ -174,6 +178,7 @@
                    
                 this.user = userRequest.data;
                 this.userDetail = userDetailRequest.data;
+                this.calculatePvpRate();
             },
             goHomepage(serverId, characterId) {
                 const url = 'https://aion.plaync.com/characters/server/' + serverId + '/id/' + characterId + '/home';
@@ -222,7 +227,7 @@
             //마법저항 충족도 계산
             calculateMagicResist(value){
                 if(value >= 2000) return "bg-danger";
-                else if(value >= 1800) return "bg-warning";
+                else if(value >= 1700) return "bg-warning";
                 return "bg-light";
             },
             //방패방어 충족도 계산
@@ -241,6 +246,16 @@
                 if(value >= 2200) return "bg-danger";
                 else if(value >= 1900) return "bg-warning";
                 return "bg-light";
+            },
+            calculatePvpAttack(value){
+                if(value >= 15) return 'bg-danger';
+                else if(value >= 10) return 'bg-warning';
+                return 'bg-light';
+            },
+            calculatePvpDefence(value){
+                if(value >= 18) return 'bg-danger';
+                else if(value >= 13) return 'bg-warning';
+                return 'bg-light';
             },
 
             //타입 판정
@@ -272,9 +287,42 @@
                 }
                 return false;
             },
+            calculatePvpRate(){
+                const equipments = this.userDetail.character_equipments;
+                let pvpAttackRate = 0, pvpDefenceRate = 0;
+                for(let i=0; i < equipments.length; i++){
+                    switch(equipments[i].category1.name){
+                        case "무기":
+                        case "장신구":
+                            pvpAttackRate += this.calculatePvpAttackRate(equipments[i]);
+                            break;
+                        case "방어구":
+                        case "날개":
+                            pvpDefenceRate += this.calculatePvpDefenceRate(equipments[i]);
+                            break;
+                    }
+                }
+                this.userDetail.pvpAttackRate = pvpAttackRate;
+                this.userDetail.pvpDefenceRate = pvpDefenceRate;
+            },
+            calculatePvpAttackRate(equip){
+                const regex = /십부장|백부장|천부장|만부장|군단장/;
+                const result = equip.name.match(regex);
+                if(!result) return 0.0;
+                
+                return this.pvpStats[result][equip.category1.name][equip.category2.name];
+            },
+            calculatePvpDefenceRate(equip){
+                const regex = /십부장|백부장|천부장|만부장|군단장/;
+                const result = equip.name.match(regex);
+                if(!result) return 0;
+
+                const subCategory = equip.category2.name == "머리방어구" ? equip.category2.name : equip.category3.name;
+                return this.pvpStats[result][equip.category1.name][subCategory];
+            },
         },
         created() {
-            
+            this.pvpStats = require("@/assets/json/pvp.json");
         },
     };
 </script>
