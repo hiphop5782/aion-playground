@@ -123,12 +123,14 @@
                                     {{userDetail.pvpAttackRate.toFixed(1)}}%
                                     <span v-if="isTwohandClass(user.jobName)"> + &alpha;</span>
                                 </span>
+                                <span v-else class="badge rounded-pill fw-bold bg-light">0.0%</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
                                 PvP 방어력
                                 <span v-if="userDetail.pvpDefenceRate" class="badge rounded-pill fw-bold" :class="calculatePvpDefence(userDetail.pvpDefenceRate)">
                                     {{userDetail.pvpDefenceRate.toFixed(1)}}%
                                 </span>
+                                <span v-else class="badge rounded-pill fw-bold bg-light">0.0%</span>
                             </li>
                         </ul>
                     </div>
