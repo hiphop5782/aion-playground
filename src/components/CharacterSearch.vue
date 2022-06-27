@@ -335,6 +335,7 @@
                             if(equipments[i].name.match("정예.*?만부장")) {
                                 count++;
                             }
+                            console.log(equipments[i].name, this.calculatePvpDefenceRate(equipments[i]));
                             pvpDefenceRate += this.calculatePvpDefenceRate(equipments[i]);
                             break;
                         case "날개":
@@ -361,7 +362,19 @@
                 const result = equip.name.match(regex);
                 if(!result) return 0;
 
-                const subCategory = equip.category2.name == "머리방어구" ? equip.category2.name : equip.category3.name;
+                let subCategory;
+                switch(equip.category2.name){
+                    case "머리방어구": 
+                        subCategory = equip.category2.name;
+                        break;
+                    case "방패":
+                        subCategory = equip.category2.name;
+                        break;
+                    default:
+                        subCategory = equip.category3.name;
+                        break;
+                }
+                
                 return this.pvpStats[result][equip.category1.name][subCategory];
             },
 
