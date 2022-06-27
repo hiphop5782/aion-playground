@@ -313,6 +313,7 @@
             calculatePvpRate(){
                 const equipments = this.userDetail.character_equipments;
                 let pvpAttackRate = 0, pvpDefenceRate = 0;
+                let count = 0;
                 for(let i=0; i < equipments.length; i++){
                     switch(equipments[i].category1.name){
                         case "무기":
@@ -320,6 +321,11 @@
                             pvpAttackRate += this.calculatePvpAttackRate(equipments[i]);
                             break;
                         case "방어구":
+                            if(equipments[i].name.match("정예.*?만부장")) {
+                                count++;
+                            }
+                            pvpDefenceRate += this.calculatePvpDefenceRate(equipments[i]);
+                            break;
                         case "날개":
                             pvpDefenceRate += this.calculatePvpDefenceRate(equipments[i]);
                             break;
@@ -327,6 +333,9 @@
                 }
                 this.userDetail.pvpAttackRate = pvpAttackRate;
                 this.userDetail.pvpDefenceRate = pvpDefenceRate;
+                if(count == 5) {
+                    this.userDetail.pvpDefenceRate += 0.3;
+                }
             },
             calculatePvpAttackRate(equip){
                 const regex = /십부장|백부장|천부장|만부장|군단장/;
