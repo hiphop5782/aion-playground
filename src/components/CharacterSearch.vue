@@ -23,7 +23,7 @@
                     @click.prevent="goGuild(user.serverId, user.guildId);">{{user.guildName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{userDetail.character_abyss.rankName}}</a>
                 <input type="checkbox" class="btn-check" autocomplete="off" id="btn-keepalive" v-model="keepAlive.active">
-                <label class="btn btn-outline-danger ms-1" for="btn-keepalive">자동갱신</label>
+                <label class="btn btn-outline-danger ms-1" for="btn-keepalive">실시간</label>
             </div>
         </div>
 
@@ -153,7 +153,6 @@
     import CharacterSearchBarVue from "./search/CharacterSearchBar.vue";
     import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
     import axios from "axios";
-    import _ from "lodash";
 
     export default {
         name: "CharacterSearch",
@@ -176,20 +175,21 @@
         },
         watch: {
             'keepAlive.active':{
-                handler:_.debounce(function(){
+                handler:function(){
                     if(this.keepAlive.active){
                         this.enableKeepAliveProcess();
                     }
                     else{
                         this.disableKeepAliveProcess();
                     }
-                }, 250),
+                },
                 deep:true,
-                immediate:true,
             },
         },
         methods: {
             async selectItem(user) {
+                this.keepAlive.active = false;
+
                 const [userRequest] = await Promise.all([
                     axios.get(this.$store.state.host+"/userinfo/" + user.serverId + "/" + user
                     .charId),
@@ -338,10 +338,11 @@
                 }
             },
             calculatePvpAttackRate(equip){
-                const regex = /십부장|백부장|천부장|만부장|군단장/;
+                const regex = /십부장|백부장|천부장|만부장/;
                 const result = equip.name.match(regex);
                 if(!result) return 0.0;
                 
+                //issue : 아누하르트 군단장 가죽 허리띠가 pvp 아이템으로 인식되는 현상 발생
                 return this.pvpStats[result][equip.category1.name][equip.category2.name];
             },
             calculatePvpDefenceRate(equip){
@@ -368,7 +369,10 @@
                 this.keepAlive.handler = null;
             },
             async keepAliveProcess(){
-                if(!this.user) return;
+                if(!this.user) {
+                    this.disableKeepAliveProcess();
+                    return;
+                }
 
                 const [userDetailRequest] = await Promise.all([
                     axios.get(this.$store.state.host+"/userdetail/" + this.user.serverId + "/" + this.user.characterId),
