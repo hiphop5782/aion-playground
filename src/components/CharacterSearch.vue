@@ -132,6 +132,12 @@
                                 </span>
                                 <span v-else class="badge rounded-pill fw-bold bg-light">0.0%</span>
                             </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+                                Player Kill
+                                <span class="badge rounded-pill fw-bold" :class="calculatePlayerKill(userDetail.character_abyss.totalKillCount)">
+                                    {{userDetail.character_abyss.totalKillCount}}
+                                </span>
+                            </li>
                         </ul>
                     </div>
                     
@@ -278,6 +284,11 @@
             calculatePvpDefence(value){
                 if(value >= 18) return 'bg-danger';
                 else if(value >= 13) return 'bg-warning';
+                return 'bg-light';
+            },
+            calculatePlayerKill(value){
+                if(value >= 35000) return 'bg-danger';
+                else if(value >= 10000) return 'bg-warning';
                 return 'bg-light';
             },
 
