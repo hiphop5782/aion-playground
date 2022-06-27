@@ -2,9 +2,7 @@
     <div class="container-fluid">
         <div class="row mt-4">
             <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
-                <div class="mt-3 p-4 text-light bg-dark rounded">
-                    <h2>아이온 캐릭터 검색</h2>
-                </div>
+                <jumbotron-header title="아이온 캐릭터 검색"></jumbotron-header>
             </div>
         </div>
 
@@ -24,6 +22,8 @@
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom" v-if="user.guildName"
                     @click.prevent="goGuild(user.serverId, user.guildId);">{{user.guildName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{userDetail.character_abyss.rankName}}</a>
+                <input type="checkbox" class="btn-check" autocomplete="off" id="btn-keepalive" v-model="keepAlive.active">
+                <label class="btn btn-outline-danger ms-1" for="btn-keepalive">자동갱신</label>
             </div>
         </div>
 
@@ -150,23 +150,43 @@
     </div>
 </template>
 <script>
-    import CharacterSearchBar from "./search/CharacterSearchBar.vue";
+    import CharacterSearchBarVue from "./search/CharacterSearchBar.vue";
+    import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
     import axios from "axios";
+    import _ from "lodash";
 
     export default {
         name: "CharacterSearch",
         components: {
-            'character-search-bar': CharacterSearchBar
+            'character-search-bar': CharacterSearchBarVue,
+            'jumbotron-header':JumbotronHeaderVue,
         },
         data() {
             return {
+                searchResult:null,
                 user: null,
                 userDetail: null,
                 pvpStats:{},
+                keepAlive:{
+                    active:false,
+                    handler:null,
+                    interval:7000,
+                },
             };
         },
         watch: {
-            
+            'keepAlive.active':{
+                handler:_.debounce(function(){
+                    if(this.keepAlive.active){
+                        this.enableKeepAliveProcess();
+                    }
+                    else{
+                        this.disableKeepAliveProcess();
+                    }
+                }, 250),
+                deep:true,
+                immediate:true,
+            },
         },
         methods: {
             async selectItem(user) {
@@ -181,6 +201,7 @@
                 this.user = userRequest.data;
                 this.userDetail = userDetailRequest.data;
                 this.calculatePvpRate();
+                this.keepAlive.active = true;
             },
             goHomepage(serverId, characterId) {
                 const url = 'https://aion.plaync.com/characters/server/' + serverId + '/id/' + characterId + '/home';
@@ -321,6 +342,31 @@
 
                 const subCategory = equip.category2.name == "머리방어구" ? equip.category2.name : equip.category3.name;
                 return this.pvpStats[result][equip.category1.name][subCategory];
+            },
+
+            //keep-alive 설정
+            enableKeepAliveProcess(){
+                if(this.keepAlive.handler) return;
+
+                setTimeout(()=>{
+                    this.keepAlive.handler = setInterval(this.keepAliveProcess, this.keepAlive.interval);
+                }, this.keepAlive.interval);
+            },
+            disableKeepAliveProcess(){
+                if(!this.keepAlive.handler) return;
+
+                clearInterval(this.keepAlive.handler);
+                this.keepAlive.handler = null;
+            },
+            async keepAliveProcess(){
+                if(!this.user) return;
+
+                const [userDetailRequest] = await Promise.all([
+                    axios.get(this.$store.state.host+"/userdetail/" + this.user.serverId + "/" + this.user.characterId),
+                ]);
+                   
+                this.userDetail = userDetailRequest.data;
+                this.calculatePvpRate();
             },
         },
         created() {

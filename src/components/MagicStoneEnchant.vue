@@ -1,85 +1,80 @@
 <template>
 <div class="container-fluid">
-    <div class="mt-3 p-4 text-light bg-dark rounded">
-        <h2>마석 강화 시뮬레이션</h2>
-        <p>성공 확률 - 유일 70%, 영웅 60%</p>
+    <div class="row mt-4">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <jumbotron-header title="마석 강화 시뮬레이션" contents="인게임 수치와 동일하게 설정되어 있습니다"></jumbotron-header>
+        </div>
     </div>
     
     <div class="row mt-3">
-        <label class="col-form-label col-md-3">
-            아이템 선택
-        </label>
-        <div class="col-md-9 position-relative">
-            <item-search-bar :data-list="itemList" @select-item="selectItem"></item-search-bar>
-
-            <!-- <div class="datalist">
-                <div class="datalist-item row" v-for="(item, index) in itemList" :key="index" @click="keyword = index">
-                    <div class="col-3">{{item.grade}}</div>
-                    <div class="col-9">{{item.name}}</div>
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <div class="row">
+                <label class="col-form-label col-md-3">
+                    아이템 선택
+                </label>
+                <div class="col-md-9 position-relative">
+                    <item-search-bar :data-list="itemList" @select-item="selectItem"></item-search-bar>
                 </div>
-            </div> -->
-
-            <!--             
-            <select class="form-select" v-model="keyword">
-                <option value="">선택하세요</option>
-                <option v-for="(item, index) in itemList" :value="index" :key="index">{{item.name}}</option>
-            </select>
-             -->
+            </div>
         </div>
     </div>
 
     <div class="row mt-3" v-if="choice != null">
-        <label class="col-form-label col-md-3">
-            소켓 선택
-        </label>
-        <div class="col-md-9 d-flex">
-            <!-- <select v-model.number="socketCount" class="form-control">
-                <option value="">선택하세요</option>
-                <option v-for="count in availableSocketCountList" :key="count">{{count}}</option>
-            </select> -->
-            <label v-for="count in availableSocketCountList" :key="count" class="flex-grow-1">
-                <input type="radio" class="form-check-input" v-model.number="socketCount" :value="count"> {{count}}소켓
-            </label>
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <div class="row">
+                <label class="col-form-label col-md-3">
+                    소켓 선택
+                </label>
+                <div class="col-md-9 d-flex">
+                    <label v-for="count in availableSocketCountList" :key="count" class="flex-grow-1">
+                        <input type="radio" class="form-check-input" v-model.number="socketCount" :value="count"> {{count}}소켓
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row mt-3" v-if="selectFinish">
-        <div class="col-md-6 mb-3">
-            <div class="item-wrapper">
-                <div class="item-name" :class="{unique:choice.grade == '유일', hero:choice.grade == '영웅'}">
-                    <span class="enchant-level"></span>
-                    {{choice.name}}
-                </div>
-                <div class="item-type">종류
-                    <span v-for="n in 10" :key="n">&nbsp;</span>
-                    {{choice.subType}}
-                </div>
-                <div class="item-level">{{choice.level}}레벨 이상 사용 가능</div>
-                <hr>
-                <div class="text">강화 레벨
-                <span v-for="n in 10" :key="n">&nbsp;</span>
-                0
-                </div>
-                <hr>
-                <div class="text">마석 강화(60레벨 이하의 마석만 강화 가능)</div>
-                <div class="socket-wrapper d-flex flex-wrap mt-3">
-                    <div class="item-slot mt-2 d-flex" v-for="(socket, index) in socketList" :key="index">
-                        <img class="stone-image" src="@/assets/image/item_magicstone_equip.png" v-if="socket.result">
-                        <img class="stone-image" src="@/assets/image/item_magicstone_empty.png" v-else>
-                        <div class="stone-name">{{socket.name}}</div>
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="item-wrapper">
+                        <div class="item-name" :class="{unique:choice.grade == '유일', hero:choice.grade == '영웅'}">
+                            <span class="enchant-level"></span>
+                            {{choice.name}}
+                        </div>
+                        <div class="item-type">종류
+                            <span v-for="n in 10" :key="n">&nbsp;</span>
+                            {{choice.subType}}
+                        </div>
+                        <div class="item-level">{{choice.level}}레벨 이상 사용 가능</div>
+                        <hr>
+                        <div class="text">강화 레벨
+                        <span v-for="n in 10" :key="n">&nbsp;</span>
+                        0
+                        </div>
+                        <hr>
+                        <div class="text">마석 강화(60레벨 이하의 마석만 강화 가능)</div>
+                        <div class="socket-wrapper d-flex flex-wrap mt-3">
+                            <div class="item-slot mt-2 d-flex" v-for="(socket, index) in socketList" :key="index">
+                                <img class="stone-image" src="@/assets/image/item_magicstone_equip.png" v-if="socket.result">
+                                <img class="stone-image" src="@/assets/image/item_magicstone_empty.png" v-else>
+                                <div class="stone-name">{{socket.name}}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-6 d-flex flex-wrap align-items-center mb-3 stone-item-wrapper">
-            <div class="stone-item" v-for="(stone, index) in stoneList" :key="index">
-                <label class="d-block">
-                    <input type="radio" name="stone" :value="index" class="d-none" v-model="enchant.stone">
-                    <div>
-                        <img class="stone-image" src="@/assets/image/item_magicstone_equip.png">
-                        <span class="ms-2">{{stone.name}}</span>
+                <div class="col-md-6 d-flex flex-wrap align-items-center mb-3 stone-item-wrapper">
+                    <div class="stone-item" v-for="(stone, index) in stoneList" :key="index">
+                        <label class="d-block">
+                            <input type="radio" name="stone" :value="index" class="d-none" v-model="enchant.stone">
+                            <div>
+                                <img class="stone-image" src="@/assets/image/item_magicstone_equip.png">
+                                <span class="ms-2">{{stone.name}}</span>
+                            </div>
+                        </label>
                     </div>
-                </label>
+                </div>
             </div>
         </div>
     </div>
@@ -124,11 +119,15 @@
 </div>
 </template>
 <script>
-import ItemSearchBar from "./search/ItemSearchBar.vue";
+import ItemSearchBarVue from "./search/ItemSearchBar.vue";
+import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
 
 export default {
     name:"MagicStoneEnchant",
-    components:{ItemSearchBar},
+    components:{
+        'item-search-bar':ItemSearchBarVue,
+        'jumbotron-header':JumbotronHeaderVue
+    },
     data(){
         return {
             keyword:"",

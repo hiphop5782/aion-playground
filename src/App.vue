@@ -12,10 +12,6 @@
             <router-link class="nav-link" :to="menu.path">{{menu.name}}</router-link>
           </li>
         </ul>
-        <form class="d-flex character-search-form">
-          <input class="form-control me-sm-2" type="text" placeholder="캐릭터 이름">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
