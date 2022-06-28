@@ -606,5 +606,15 @@
         "extraType": "로브",
         "code": "114100902",
         "trade": false
+    },
+    {
+        "name": "타하바타의 방패",
+        "level": 50,
+        "grade": "영웅",
+        "type": "방어구",
+        "subType": "방패",
+        "extraType": "",
+        "code": "115000860",
+        "trade": false
     }
 ]

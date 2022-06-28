@@ -294,5 +294,86 @@
         "subType": "장검",
         "code": "100001081",
         "trade": false
+    },
+    {
+        "name": "타하바타의 검",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "장검",
+        "code": "100000768",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 단도",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "단검",
+        "code": "100200702",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 양손검",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "대검",
+        "code": "100900591",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 창",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "창",
+        "code": "101300564",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 장궁",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "활",
+        "code": "101700620",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 마법서",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "법서",
+        "code": "100600636",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 보옥",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "보주",
+        "code": "100500602",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 지팡이",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "지팡이",
+        "code": "100000768",
+        "trade": false
+    },
+    {
+        "name": "타하바타의 전투망치",
+        "level": 50,
+        "grade": "영웅",
+        "type": "무기",
+        "subType": "전곤",
+        "code": "100100581",
+        "trade": false
     }
 ]
