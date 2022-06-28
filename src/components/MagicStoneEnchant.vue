@@ -80,7 +80,7 @@
     </div>
 
     <div class="row mt-3" v-if="selectFinish">
-        <div class="col-md-10 offset-md-1 result-wrapper">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 result-wrapper">
             (
                 <span style="color:black;">
                 총 {{result.total}} 회 시도
@@ -105,7 +105,7 @@
     </div>
 
     <div class="row mt-4">
-        <div class="col-md-10 offset-md-1">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
             <progress-bar ref="progressBar" :messages="messages" @finish="enchantFinish"></progress-bar>
         </div>
     </div>
@@ -272,6 +272,9 @@ export default {
 };
 </script>
 <style scoped>
+    .container-fluid {
+        margin-bottom: 100px;
+    }
     .item-wrapper {
         border:1px solid rgb(59, 79, 109);
         background-color:rgb(35, 42, 53);
@@ -344,9 +347,6 @@ export default {
     .button-wrapper > button:not(:first-child){
         margin: 0 0 0 10px;
     }
-    .progress-wrapper{
-        background-color: white;
-    }
     .result-wrapper {
         text-align: center;
     }
@@ -375,7 +375,7 @@ export default {
             left:0;
             right:0;
             bottom: 0;
-            height:10px;
+            height:60px;
         }
         .result-wrapper {
             text-align: left;

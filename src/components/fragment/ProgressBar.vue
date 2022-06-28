@@ -1,7 +1,7 @@
 <template>
 <div class="progress-wrapper">
     <div class="progress">
-        <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar"
+        <div class="progress-bar progress-bar-primary progress-bar-striped progress-bar-animated" role="progressbar"
             :area-valuenow="progress" :area-valuemin="minvalue" :area-valuemax="maxvalue" :style="styleObject">
             <span v-if="labelVisibleCheck" >{{percent}} %</span>
         </div>
@@ -109,5 +109,10 @@ export default {
 }
 </script>
 <style scoped>
-
+    .progress-wrapper {
+        background-color: white;
+    }
+    .progress-wrapper > .progress > .progress-bar {
+        transition: none;
+    }
 </style>
