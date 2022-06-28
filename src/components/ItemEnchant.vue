@@ -19,7 +19,11 @@
         </div>
     </div>
 
-    <progress-bar></progress-bar>
+    <div class="row mt-3">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <progress-bar></progress-bar>
+        </div>
+    </div>
     
 </div>
 </template>
