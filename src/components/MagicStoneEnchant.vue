@@ -67,7 +67,7 @@
                 <div class="col-md-6 d-flex flex-wrap align-items-center mb-3 stone-item-wrapper">
                     <div class="stone-item" v-for="(stone, index) in stoneList" :key="index">
                         <label class="d-block">
-                            <input type="radio" name="stone" :value="index" class="d-none" v-model="enchant.stone">
+                            <input type="radio" name="stone" :value="index" class="d-none" v-model="enchantStoneIndex">
                             <div>
                                 <img class="stone-image" src="@/assets/image/item_magicstone_equip.png">
                                 <span class="ms-2">{{stone.name}}</span>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="row mt-3" v-if="selectFinish">
-        <div class="col-md-10 offset-md-1 result-wrapper">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 result-wrapper">
             (
                 <span style="color:black;">
                 총 {{result.total}} 회 시도
@@ -104,16 +104,9 @@
         <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
     </div>
 
-    <div class="row mt-4 progress-wrapper" style="height:60px">
-        <div class="col-md-10 offset-md-1" v-if="enchant.progress">
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" :style="{width: enchant.progress + '%'}"
-                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h6 class="text-center mt-2 result" 
-            :class="{success:enchant.progress == 100 && enchant.result, fail:enchant.progress == 100 && !enchant.result}">
-                {{progressText}}
-            </h6>
+    <div class="row mt-4">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <progress-bar ref="progressBar" :messages="messages" @finish="enchantFinish"></progress-bar>
         </div>
     </div>
 </div>
@@ -121,12 +114,14 @@
 <script>
 import ItemSearchBarVue from "./search/ItemSearchBar.vue";
 import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
+import ProgressBarVue from "./fragment/ProgressBar.vue";
 
 export default {
     name:"MagicStoneEnchant",
     components:{
         'item-search-bar':ItemSearchBarVue,
-        'jumbotron-header':JumbotronHeaderVue
+        'jumbotron-header':JumbotronHeaderVue,
+        'progress-bar':ProgressBarVue,
     },
     data(){
         return {
@@ -137,17 +132,9 @@ export default {
             socketCount:"",
             socketList:[],
 
-            enchant:{
-                stone:0,
-                progress:0,
-                result:false,
-                success:0,
-                clear(){
-                    this.progress = 0;
-                    this.success = 0;
-                    this.result = false;
-                },
-            },
+            enchantStoneIndex:0,
+            enchantSuccessCombo:0,
+            enchantResult:false,
             
             result : {
                 total:0,
@@ -157,32 +144,29 @@ export default {
 
             choice : null,
 
+            messages:{
+                begin:"준비",
+                step:"마석 강화 중",
+                end:"완료"
+            },
         };
     },
     computed:{
          selectFinish(){
             return this.choice != null && this.socketCount > 0;
          },
-         progressText(){
-            if(this.enchant.progress < 100)
-                return "마석 강화 중";
-            else if(this.enchant.result)
-                return "마석 강화 성공";
-            else
-                return "마석 강화 실패";
-         },
          choiceItemName(){
             if(!this.choice) return "";
             return "["+this.choice.grade+"] " + this.choice.name;
-         },
-         isEnchantFinished(){
-            return this.enchant && this.enchant.success == this.socketCount;
          },
          enchantButtonLabel(){
             return this.isEnchantFinished ? "완료" : "강화";
          },
          enchantStone(){
-            return this.stoneList[this.enchant.stone];
+            return this.stoneList[this.enchantStoneIndex];
+         },
+         isEnchantFinished(){
+            return this.enchantSuccessCombo == this.socketCount;
          },
          availableSocketCountList(){
             if(!this.choice) return null;
@@ -199,52 +183,37 @@ export default {
                 this.socketList[i].name = "";
                 this.socketList[i].result = false;
             }
-            this.enchant.result = false;
-            this.enchant.progress = 0;
-            this.enchant.success = 0;
 
             this.result.total = 0;
             this.result.success = 0;
             this.result.fail = 0;
         },
-        startEnchantProgress(second){
-            if(this.enchant.success == this.socketCount) return;
+        startEnchantProgress(){
+            if(this.enchantSuccessCombo == this.socketCount) return;
 
             if(!this.enchantStone) return;
 
-            this.enchant.progress = 0;
-
-            var proc = () => {
-                this.enchant.progress++;
-                if (this.enchant.progress < 99) {
-                    setTimeout(proc, second / 100);
-                } else {
-                    setTimeout(this.afterEnchantProgress,1000);
-                }
-            };
-
-            setTimeout(proc, 100);
+            this.$refs.progressBar.start();
         },
-        enchantProgress(){
+        enchant(){
             const successRate = this.calculateEnchantRate(this.choice.grade);
             return Math.floor(Math.random() * 100) < successRate;
         },
-        afterEnchantProgress(){
-            this.enchant.progress = 100;
-
-            const result = this.enchantProgress(1);
+        enchantFinish(){
+            const result = this.enchant();
 
             if(result){
 
-                if(!this.socketList[this.enchant.success])
+                if(!this.socketList[this.enchantSuccessCombo])
                     throw "강화 완료";
 
-                if(!this.socketList[this.enchant.success].result){
-                    this.socketList[this.enchant.success].name = this.enchantStone.name;
-                    this.socketList[this.enchant.success].result = true;
+                if(!this.socketList[this.enchantSuccessCombo].result){
+                    this.socketList[this.enchantSuccessCombo].name = this.enchantStone.name;
+                    this.socketList[this.enchantSuccessCombo].result = true;
                 }
-                this.enchant.result = true;
-                this.enchant.success++;
+
+                this.enchantResult = true;
+                this.enchantSuccessCombo++;
                 this.result.success++;
 
                 // if(this.socketList[this.socketList.length-1]){
@@ -255,8 +224,8 @@ export default {
                     this.socketList[i].name = "";
                     this.socketList[i].result = false;
                 }
-                this.enchant.result = false;
-                this.enchant.success = 0;
+                this.enchantResult = false;
+                this.enchantSuccessCombo = 0;
                 this.result.fail++;
             }
 
@@ -271,7 +240,7 @@ export default {
         },
         multipleEnchantProgress(count){
             for(let i=0; i < count; i++){
-                this.afterEnchantProgress();
+                this.enchantFinish();
             }
         },
         selectItem(item){
@@ -285,7 +254,7 @@ export default {
                 this.socketList.push({name:"", result:false});
             }
 
-            this.enchant.clear();
+            this.$refs.progressBar.clear();
         },
         choice(){
             this.socketCount = this.availableSocketCountList[0];
@@ -303,6 +272,9 @@ export default {
 };
 </script>
 <style scoped>
+    .container-fluid {
+        margin-bottom: 100px;
+    }
     .item-wrapper {
         border:1px solid rgb(59, 79, 109);
         background-color:rgb(35, 42, 53);
@@ -375,9 +347,6 @@ export default {
     .button-wrapper > button:not(:first-child){
         margin: 0 0 0 10px;
     }
-    .progress-wrapper{
-        background-color: white;
-    }
     .result-wrapper {
         text-align: center;
     }
@@ -406,7 +375,7 @@ export default {
             left:0;
             right:0;
             bottom: 0;
-            height:10px;
+            height:60px;
         }
         .result-wrapper {
             text-align: left;
