@@ -18,16 +18,24 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+            <progress-bar></progress-bar>
+        </div>
+    </div>
 </div>
 </template>
 <script>
 import JumbotronHeader from './layout/JumbotronHeader.vue';
 import ItemSearchBar from './search/ItemSearchBar.vue';
+import ProgressBar from './fragment/ProgressBar.vue';
 export default {
     name:"ItemExtraction",
     components:{
         'jumbotron-header':JumbotronHeader,
         'item-search-bar':ItemSearchBar,
+        'progress-bar':ProgressBar,
     },
     data(){
         return {
