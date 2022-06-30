@@ -96,12 +96,17 @@
             )
         </div>
     </div>
-    <div class="button-wrapper" v-if="selectFinish">
-        <button class="btn btn-danger" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10회</button>
-        <button class="btn btn-danger" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100회</button>
-        <button class="btn btn-danger" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000회</button>
-        <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
-        <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
+
+    <div class="row mt-3" v-if="selectFinish">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 result-wrapper">
+            <div class="button-wrapper" v-if="selectFinish">
+                <button class="btn btn-danger" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10회</button>
+                <button class="btn btn-danger" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100회</button>
+                <button class="btn btn-danger" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000회</button>
+                <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
+                <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
+            </div>
+        </div>
     </div>
 
     <div class="row mt-4">
