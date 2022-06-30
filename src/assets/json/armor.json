@@ -616,5 +616,25 @@
         "extraType": "",
         "code": "115000860",
         "trade": false
+    },
+    {
+        "name": "루드라의 비늘 방패",
+        "level": 55,
+        "grade": "영웅",
+        "type": "방어구",
+        "subType": "방패",
+        "extraType": "",
+        "code": "115000967",
+        "trade": false
+    },
+    {
+        "name": "루드라의 방패",
+        "level": 55,
+        "grade": "영웅",
+        "type": "방어구",
+        "subType": "방패",
+        "extraType": "",
+        "code": "115000966",
+        "trade": false
     }
 ]
