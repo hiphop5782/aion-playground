@@ -3,8 +3,6 @@ name: Deployment-Action
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "deploy" ]
 
 jobs:
   deploy:
