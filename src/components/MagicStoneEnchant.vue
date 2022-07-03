@@ -192,6 +192,8 @@ export default {
             this.result.total = 0;
             this.result.success = 0;
             this.result.fail = 0;
+
+            this.enchantSuccessCombo = 0;
         },
         startEnchantProgress(){
             if(this.enchantSuccessCombo == this.socketCount) return;
@@ -271,7 +273,6 @@ export default {
         this.stoneList.push(...require("@/assets/json/magicstone.json"));
     },
     mounted:function(){
-        
        
     },
 };
