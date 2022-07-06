@@ -41,12 +41,6 @@
                             </div>
                             <hr>
                             <div class="text">마석 강화({{usableStoneMaxLevel}}레벨 이하의 마석만 강화 가능)</div>
-                            <div class="socket-wrapper d-flex flex-wrap mt-3">
-                                <div class="item-slot mt-2 d-flex" v-for="socket in socketCount" :key="socket">
-                                    <img class="stone-image" src="@/assets/image/item_magicstone_empty.png">
-                                    <div class="stone-name"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 d-grid align-items-center mb-3 stone-item-wrapper" v-if="stoneRange > 0">
@@ -303,7 +297,7 @@
                 let height = origin.scrollHeight;
                 const width = document.querySelector("#app").scrollWidth;
                 if (width <= 768) {
-                    height /= 3;
+                    height /= 2;
                 }
                 target.style.height = height + "px";
             }, 250),
@@ -410,7 +404,7 @@
                 this.whenResized();
                 setTimeout(() => {
                     this.moveToStonePosition();
-                }, 100);
+                }, 250);
             },
         },
         created() {
