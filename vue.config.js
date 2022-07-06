@@ -6,5 +6,6 @@ module.exports = defineConfig({
     compress:true,
     port:8081,
     allowedHosts:"all",
+    // https:true,
   },
 })

@@ -54,7 +54,7 @@
                         0
                         </div>
                         <hr>
-                        <div class="text">마석 강화(60레벨 이하의 마석만 강화 가능)</div>
+                        <div class="text">마석 강화({{usableStoneMaxLevel}}레벨 이하의 마석만 강화 가능)</div>
                         <div class="socket-wrapper d-flex flex-wrap mt-3">
                             <div class="item-slot mt-2 d-flex" v-for="(socket, index) in socketList" :key="index">
                                 <img class="stone-image" src="@/assets/image/item_magicstone_equip.png" v-if="socket.result">
@@ -96,12 +96,17 @@
             )
         </div>
     </div>
-    <div class="button-wrapper" v-if="selectFinish">
-        <button class="btn btn-danger" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10회</button>
-        <button class="btn btn-danger" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100회</button>
-        <button class="btn btn-danger" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000회</button>
-        <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
-        <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
+
+    <div class="row mt-3" v-if="selectFinish">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 result-wrapper">
+            <div class="button-wrapper" v-if="selectFinish">
+                <button class="btn btn-danger" @click="multipleEnchantProgress(10);" :disabled="isEnchantFinished">10회</button>
+                <button class="btn btn-danger" @click="multipleEnchantProgress(100);" :disabled="isEnchantFinished">100회</button>
+                <button class="btn btn-danger" @click="multipleEnchantProgress(1000);" :disabled="isEnchantFinished">1000회</button>
+                <button class="btn btn-secondary" @click="clearEnchantProgress();">초기화</button>
+                <button class="btn btn-primary" @click="startEnchantProgress(3);" :disabled="isEnchantFinished">{{enchantButtonLabel}}</button>
+            </div>
+        </div>
     </div>
 
     <div class="row mt-4">
@@ -176,6 +181,10 @@ export default {
             }
             return null;
          },
+         usableStoneMaxLevel() {
+            if(!this.choice) return 0;
+            return parseInt((this.choice.level + 5) / 10) * 10;
+         }
     },
     methods:{
         clearEnchantProgress(){
@@ -187,6 +196,8 @@ export default {
             this.result.total = 0;
             this.result.success = 0;
             this.result.fail = 0;
+
+            this.enchantSuccessCombo = 0;
         },
         startEnchantProgress(){
             if(this.enchantSuccessCombo == this.socketCount) return;
@@ -266,7 +277,6 @@ export default {
         this.stoneList.push(...require("@/assets/json/magicstone.json"));
     },
     mounted:function(){
-        
        
     },
 };
@@ -350,7 +360,7 @@ export default {
     .result-wrapper {
         text-align: center;
     }
-    @media screen and (max-width:640px){
+    @media screen and (max-width:768px){
         .stone-item-wrapper {
             height:20vh;
         }

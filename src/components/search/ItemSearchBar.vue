@@ -1,5 +1,5 @@
 <template>
-    <input type="text" class="form-control rounded" v-model="keyword" @input="keyword = $event.target.value" @click="searchOperation">
+    <input type="text" class="form-control rounded border border-primary" v-model="keyword" @input="keyword = $event.target.value" @click="searchOperation">
     <ul class="list-group" :style="styleObject">
         <li class="list-group-item" v-for="(data, index) in filterList" :key="index" @click="selectData(index);">
             <div :class="{'unique-item':data.grade == '유일', 'hero-item':data.grade == '영웅'}">
