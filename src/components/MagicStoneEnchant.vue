@@ -54,7 +54,7 @@
                         0
                         </div>
                         <hr>
-                        <div class="text">마석 강화(60레벨 이하의 마석만 강화 가능)</div>
+                        <div class="text">마석 강화({{usableStoneMaxLevel}}레벨 이하의 마석만 강화 가능)</div>
                         <div class="socket-wrapper d-flex flex-wrap mt-3">
                             <div class="item-slot mt-2 d-flex" v-for="(socket, index) in socketList" :key="index">
                                 <img class="stone-image" src="@/assets/image/item_magicstone_equip.png" v-if="socket.result">
@@ -181,6 +181,10 @@ export default {
             }
             return null;
          },
+         usableStoneMaxLevel() {
+            if(!this.choice) return 0;
+            return parseInt((this.choice.level + 5) / 10) * 10;
+         }
     },
     methods:{
         clearEnchantProgress(){
@@ -356,7 +360,7 @@ export default {
     .result-wrapper {
         text-align: center;
     }
-    @media screen and (max-width:640px){
+    @media screen and (max-width:768px){
         .stone-item-wrapper {
             height:20vh;
         }
