@@ -335,7 +335,6 @@
                             if(equipments[i].name.match("정예.*?만부장")) {
                                 count++;
                             }
-                            console.log(equipments[i].name, this.calculatePvpDefenceRate(equipments[i]));
                             pvpDefenceRate += this.calculatePvpDefenceRate(equipments[i]);
                             break;
                         case "날개":
