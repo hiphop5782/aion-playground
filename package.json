@@ -11,7 +11,15 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
-  "main": "background.js",
+  "electronWebpack": {
+    "commonSourceDirectory":"common",
+    "main":{
+      "sourceDirectory":"main"
+    },
+    "renderer": {
+      "sourceDirectory":null
+    }
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
