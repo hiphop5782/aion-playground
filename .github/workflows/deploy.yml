@@ -22,32 +22,28 @@ jobs:
         run: npm install
       
       # build vue production
-      - name: Build
+      - name: Build Vue Application
         run: npm run build
         env:
           NODE_ENV: production
       
       # build electron app
-      - name: Build
-        run: npm run electron:build
-        env:
-          NODE_ENV: production
-          GH_TOKEN: ${{ secrets.github_token }}
+      #- name: Build Electron Application
+      #  run: npm run electron:build
+      #  env:
+      #    NODE_ENV: production
+      #    GH_TOKEN: ${{ secrets.github_token }}
           
-      # - name: Build/release Electron app
-      #   uses: samuelmeuli/action-electron-builder@v1
-      #   with:
-      #    # GitHub token, automatically provided to the action
-      #    # (No need to define this secret in the repo settings)
-      #    github_token: ${{ secrets.github_token }}
-      
+      # commit
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          messages: Github action auto commit
+          add: "-A"
+          # message: Github action auto commit
           author_name: hiphop5782
           author_email: zdlsz@hanmail.net
-        
+      
+      # push
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
