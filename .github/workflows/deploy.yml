@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@main
         with:
           node-version: 14.x
+          
+      - name: Install dependencies
+        run: npm install
       
       - name: Build
         run: npm run build
@@ -33,9 +36,6 @@ jobs:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
           github_token: ${{ secrets.github_token }}
-      
-      - name: Install dependencies
-        run: npm install
       
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
