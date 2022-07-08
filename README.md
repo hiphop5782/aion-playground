@@ -1,24 +1,8 @@
-# aion-playground
+# 아이온놀이터
 
-## Project setup
-```
-npm install
-```
+## 주요기능
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. 캐릭터 실시간 검색
+2. 아이템 추출(미구현)
+3. 아이템 강화
+4. 마석 강화
