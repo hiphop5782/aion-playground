@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="item-wrapper">
-                        <div class="item-name" :class="{unique:choice.grade == '유일', hero:choice.grade == '영웅'}">
+                        <div class="item-name" :class="calculateItemGradeClass">
                             <span class="enchant-level"></span>
                             {{choice.name}}
                         </div>
@@ -178,13 +178,25 @@ export default {
             switch(this.choice.grade){
                 case "유일": return [4, 5, 6];
                 case "영웅": return [5, 6];
+                case "신화": return [5, 6];
+                case "궁극": return [6];
             }
             return null;
          },
          usableStoneMaxLevel() {
             if(!this.choice) return 0;
-            return parseInt((this.choice.level + 5) / 10) * 10;
-         }
+            return parseInt((this.choice.level + 19) / 10) * 10;
+         },
+         calculateItemGradeClass(){
+            if(!this.choice) return null;
+            switch(this.choice.grade){
+                case "유일": return "unique";
+                case "영웅": return "epic";
+                case "신화": return "mythic";
+                case "궁극": return "finality";
+            }
+            return null;
+         },
     },
     methods:{
         clearEnchantProgress(){
@@ -246,6 +258,8 @@ export default {
             switch(grade){
                 case "유일": return 70;
                 case "영웅": return 60;
+                case "신화": return 50;
+                case "궁극": return 40;
             }
             return 0;
         },
@@ -272,8 +286,23 @@ export default {
         },
     },
     created:function(){
-        this.itemList.push(...require("@/assets/json/weapon.json"));
-        this.itemList.push(...require("@/assets/json/armor.json"));
+        // this.itemList.push(...require("@/assets/json/weapon.json"));
+        // this.itemList.push(...require("@/assets/json/armor.json"));
+        this.itemList.push(...require("@/assets/json/weapon/sword.json"));
+        this.itemList.push(...require("@/assets/json/weapon/dagger.json"));
+        this.itemList.push(...require("@/assets/json/weapon/greatsword.json"));
+        this.itemList.push(...require("@/assets/json/weapon/mace.json"));
+        this.itemList.push(...require("@/assets/json/weapon/polearm.json"));
+        this.itemList.push(...require("@/assets/json/weapon/bow.json"));
+        this.itemList.push(...require("@/assets/json/weapon/staff.json"));
+        this.itemList.push(...require("@/assets/json/weapon/spellbook.json"));
+        this.itemList.push(...require("@/assets/json/weapon/orb.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_revolver.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_cannon.json"));
+        this.itemList.push(...require("@/assets/json/weapon/stringed_instrument.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_key.json"));
+        this.itemList.push(...require("@/assets/json/weapon/paint_rings.json"));
+
         this.stoneList.push(...require("@/assets/json/magicstone.json"));
     },
     mounted:function(){
@@ -303,8 +332,14 @@ export default {
     .item-wrapper > .item-name.unique {
         color:rgb(255, 193, 3);
     }
-    .item-wrapper > .item-name.hero {
+    .item-wrapper > .item-name.epic {
         color:rgb(255, 128, 51);
+    }
+    .item-wrapper > .item-name.mythic {
+        color:#dd43ef;
+    }
+    .item-wrapper > .item-name.finality {
+        color:#e14141;
     }
     .item-wrapper > .item-type , 
     .item-wrapper > .text {
