@@ -44,7 +44,7 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          messages: Github action auto commit
+          message: Github action auto commit
           author_name: hiphop5782
           author_email: zdlsz@hanmail.net
         
