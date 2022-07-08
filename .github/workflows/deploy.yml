@@ -17,6 +17,15 @@ jobs:
         uses: actions/setup-node@main
         with:
           node-version: 14.x
+      
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+      - name: Build
+        run: npm run electron:build
+        env:
+          NODE_ENV: production
           
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
@@ -27,15 +36,6 @@ jobs:
       
       - name: Install dependencies
         run: npm install
-      
-      - name: Build
-        run: npm run build
-        env:
-          NODE_ENV: production
-      - name: Build
-        run: npm run electron:build
-        env:
-          NODE_ENV: production
       
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
