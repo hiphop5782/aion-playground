@@ -2,16 +2,18 @@
 import axios from 'axios';
 import store from '@/store';
 
-import moment from "moment";
-let lastAccess = moment().valueOf();
+let requestFlag = false;
 axios.interceptors.request.use(
     config=>{
-        let currentAccess = moment().valueOf();
-        //작업발생간격 0.25초 이상만 로딩화면 출력(적용테스트중)
-        if(currentAccess - lastAccess >= 250) {
-            store.commit("loadingStart");
+        if(!requestFlag) {
+            requestFlag = true;
+            setTimeout(()=>{
+                if(requestFlag) {
+                    store.commit("loadingStart");
+                    requestFlag = false;
+                }
+            }, 500);
         }
-        lastAccess = currentAccess;
         return config;
     }, 
     error=>{
