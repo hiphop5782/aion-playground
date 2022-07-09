@@ -14,7 +14,6 @@
 </template>
 <script>
 import _ from "lodash";
-import axios from "axios";
 
 export default {
     name : "CharacterSearchBar",
@@ -52,7 +51,7 @@ export default {
                 return;
             }
 
-            axios.get(this.$store.state.host+"/usersearch/"+this.keyword)
+            this.$http.get(this.$host+"/usersearch/"+this.keyword)
             .then(resp=>{
                 this.filterList = resp.data.documents;
             });

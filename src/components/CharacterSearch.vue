@@ -158,7 +158,6 @@
 <script>
     import CharacterSearchBarVue from "./search/CharacterSearchBar.vue";
     import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
-    import axios from "axios";
 
     export default {
         name: "CharacterSearch",
@@ -179,6 +178,9 @@
                 },
             };
         },
+        computed:{
+            
+        },
         watch: {
             'keepAlive.active':{
                 handler:function(){
@@ -197,11 +199,11 @@
                 this.keepAlive.active = false;
 
                 const [userRequest] = await Promise.all([
-                    axios.get(this.$store.state.host+"/userinfo/" + user.serverId + "/" + user
+                    this.$http.get(this.$host+"/userinfo/" + user.serverId + "/" + user
                     .charId),
                 ]);
                 const [userDetailRequest] = await Promise.all([
-                    axios.get(this.$store.state.host+"/userdetail/" + user.serverId + "/" + user.charId),
+                    this.$http.get(this.$host+"/userdetail/" + user.serverId + "/" + user.charId),
                 ]);
                    
                 this.user = userRequest.data;
@@ -398,7 +400,7 @@
                 }
 
                 const [userDetailRequest] = await Promise.all([
-                    axios.get(this.$store.state.host+"/userdetail/" + this.user.serverId + "/" + this.user.characterId),
+                    this.$http.get(this.$host+"/userdetail/" + this.user.serverId + "/" + this.user.characterId),
                 ]);
                    
                 this.userDetail = userDetailRequest.data;
