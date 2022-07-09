@@ -1,5 +1,5 @@
 <template>
-    <div class="loader-wrapper" v-show="loading">
+    <!-- <div class="loader-wrapper" v-show="loading"> -->
         <pulse-loader :loading="loading" v-if="mode == 'pulse'"></pulse-loader>
         <ring-loader :loading="loading" v-if="mode == 'ring'"></ring-loader>
         <bounce-loader :loading="loading" v-if="mode=='bounce'"></bounce-loader>
@@ -16,7 +16,7 @@
         <skew-loader :loading="loading" v-if="mode=='skew'"></skew-loader>
         <moon-loader :loading="loading" v-if="mode=='moon'"></moon-loader>
         <dot-loader :loading="loading" v-if="mode=='dot'"></dot-loader>
-    </div>
+    <!-- </div> -->
 </template>
 <script>
     import PulseLoaderVue from "vue-spinner/src/PulseLoader.vue";
