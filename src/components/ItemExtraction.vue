@@ -53,8 +53,32 @@ export default {
         },
     },
     created(){
-        this.itemList.push(...require("@/assets/json/weapon.json"));
-        this.itemList.push(...require("@/assets/json/armor.json"));
+        // this.itemList.push(...require("@/assets/json/weapon.json"));
+        // this.itemList.push(...require("@/assets/json/armor.json"));
+        this.itemList.push(...require("@/assets/json/weapon/sword.json"));
+        this.itemList.push(...require("@/assets/json/weapon/dagger.json"));
+        this.itemList.push(...require("@/assets/json/weapon/greatsword.json"));
+        this.itemList.push(...require("@/assets/json/weapon/mace.json"));
+        this.itemList.push(...require("@/assets/json/weapon/polearm.json"));
+        this.itemList.push(...require("@/assets/json/weapon/bow.json"));
+        this.itemList.push(...require("@/assets/json/weapon/staff.json"));
+        this.itemList.push(...require("@/assets/json/weapon/spellbook.json"));
+        this.itemList.push(...require("@/assets/json/weapon/orb.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_revolver.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_cannon.json"));
+        this.itemList.push(...require("@/assets/json/weapon/stringed_instrument.json"));
+        this.itemList.push(...require("@/assets/json/weapon/aether_key.json"));
+        this.itemList.push(...require("@/assets/json/weapon/paint_rings.json"));
+
+        this.itemList.push(...require("@/assets/json/armor/cloth-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/cloth-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/leather-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/leather-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/chain-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/chain-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/plate-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/plate-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/shield.json"));
     },
 };
 </script>

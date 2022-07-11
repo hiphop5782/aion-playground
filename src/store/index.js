@@ -1,10 +1,20 @@
-import {createStore} from "vuex";
+import { createStore } from "vuex";
 
 export default createStore({
-    state:{
-        host:"http://api.sysout.co.kr/ap",
-        // host:"http://localhost:8888/ap",
+    state: {
+        loading:false,
     },
-    getters:{},
-    mutations:{},
+    getters: {
+        isLoading(state){
+            return state.loading;
+        },
+    },
+    mutations: {
+        loadingStart(state){
+            state.loading = true;
+        },
+        loadingFinish(state){
+            state.loading = false;
+        },
+    }
 });

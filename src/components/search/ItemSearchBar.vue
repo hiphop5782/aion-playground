@@ -1,8 +1,8 @@
 <template>
-    <input type="text" class="form-control rounded border border-primary" v-model="keyword" @input="keyword = $event.target.value" @click="searchOperation">
+    <input type="text" class="form-control rounded border border-primary" v-model="keyword" @input="keyword = $event.target.value" @click="searchOperation" @keyup.esc="clearFilterList">
     <ul class="list-group" :style="styleObject">
         <li class="list-group-item" v-for="(data, index) in filterList" :key="index" @click="selectData(index);">
-            <div :class="{'unique-item':data.grade == '유일', 'hero-item':data.grade == '영웅'}">
+            <div :class="calculateItemGradeClass(data.grade)">
                 <span>[{{data.grade}}]</span>
                 &nbsp;
                 <span>{{data.name}}</span>
@@ -12,7 +12,8 @@
 </template>
 <script>
 import _ from "lodash";
-import ChosungSearch from "hangul-chosung-search-js";
+import Hangul from "hangul-js";
+//import ChosungSearch from "hangul-chosung-search-js";
 
 export default {
     name : "ItemSearchBar",
@@ -25,11 +26,28 @@ export default {
             keyword:"",
             filterList:[],
             click:false,
+            filterLimit:20,
         };
     },
     watch:{
-        keyword:_.throttle(function(){
-            this.searchOperation();
+        keyword:_.throttle(function(after, before){
+            if(!after) {
+                this.clearKeyword();
+                return;
+            }
+            if(this.click){
+                this.click = false;
+                return;
+            }
+
+            //Hangul.search(after, before)가 0이면 검색어 입력중, -1이면 검색어 제거
+            
+            if(Hangul.search(after, before) == 0){
+                this.filterOperation();
+            }
+            else {
+                this.searchOperation();
+            }
         }, 350),
     },
     computed:{
@@ -41,25 +59,65 @@ export default {
     },
     methods:{
         searchOperation(){
-            if(!this.keyword) {
-                this.clearKeyword();
-                return;
-            }
-            if(this.click){
-                this.click = false;
-                return;
+            this.clearFilterList();
+
+            //검색어가 초성인 경우와 아닌 경우를 구분해서 처리
+            let count = 0;
+            for(let i=0; i < this.dataList.length; i++) {
+                const idx = Hangul.isConsonantAll(this.keyword) ?
+                                    Hangul.search(this.dataList[i].chosung, this.keyword)
+                                    :Hangul.search(this.dataList[i].name, this.keyword);
+
+                if(idx == 0) {
+                    this.filterList.push(this.dataList[i]);
+                    if(++count >= this.filterLimit) break;
+                }
             }
 
-            this.filterList = this.dataList.filter(this.search);
-        },
-        search(data){
-            if(ChosungSearch.isSearch(this.keyword, data.name, true)){//true : 띄어쓰기까지 고려
-                return true;
+            if(count < this.filterLimit){
+                for(let i=0; i < this.dataList.length; i++) {
+                    const idx = Hangul.isConsonantAll(this.keyword) ?
+                                        Hangul.search(this.dataList[i].chosung, this.keyword)
+                                        :Hangul.search(this.dataList[i].name, this.keyword);
+
+                    if(idx > 0) {
+                        this.filterList.push(this.dataList[i]);
+                        if(++count >= this.filterLimit) break;
+                    }
+                }
             }
-            return false;
+        },
+        filterOperation(){
+            this.filterList = this.filterList.filter((item)=>{
+                if(Hangul.isConsonantAll(this.keyword)) {
+                    return Hangul.search(item.chosung, this.keyword) >= 0;
+                }
+                else {
+                    return Hangul.search(item.name, this.keyword) >= 0;
+                }
+            });
+
+            if(this.filterList.length < this.filterLimit) {
+                let count = this.filterList.length;
+                for(let i=0; i < this.dataList.length; i++) {
+                    const idx = Hangul.isConsonantAll(this.keyword) ?
+                                        Hangul.search(this.dataList[i].chosung, this.keyword)
+                                        :Hangul.search(this.dataList[i].name, this.keyword);
+
+                    if(idx > 0) {
+                        this.filterList.push(this.dataList[i]);
+
+                        if(++count >= this.filterLimit) break;
+                    }
+                }
+            }
         },
         clearKeyword(){
             this.keyword = "";
+            this.clearFilterList();
+        },
+        clearFilterList(){
+            this.filterList = [];
         },
         selectData(index){
             this.click = true;
@@ -67,9 +125,24 @@ export default {
             this.$emit("select-item", this.filterList[index]);
             this.filterList = [];
         },
+        calculateItemGradeClass(grade){
+            switch(grade) {
+                case "유일": return "unique-item";
+                case "영웅": return "epic-item";
+                case "신화": return "mythic-item";
+                case "궁극": return "finality-item";
+            }
+        },
     },
     created(){
-        
+        //초성 배열을 별도로 준비
+        this.dataList.forEach((data, index)=>{
+            data.index = index;
+            data.chosung = Hangul.d(data.name, true)
+                                                        .map(arr=>arr[0])
+                                                        .join("")
+                                                        .replace(" ", "");
+        });
     },
 }
 </script>
@@ -108,7 +181,13 @@ export default {
     .unique-item {
         color:#ffc103;
     }
-    .hero-item {
+    .epic-item {
         color:#ff8033;
+    }
+    .mythic-item {
+        color:#dd43ef;
+    }
+    .finality-item {
+        color:#e14141;
     }
 </style>
