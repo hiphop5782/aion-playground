@@ -12,7 +12,8 @@
 </template>
 <script>
 import _ from "lodash";
-import ChosungSearch from "hangul-chosung-search-js";
+import Hangul from "hangul-js";
+//import ChosungSearch from "hangul-chosung-search-js";
 
 export default {
     name : "ItemSearchBar",
@@ -25,6 +26,7 @@ export default {
             keyword:"",
             filterList:[],
             click:false,
+            chosungList:[],
         };
     },
     watch:{
@@ -50,19 +52,16 @@ export default {
                 return;
             }
 
-            this.filterList = this.dataList.filter(this.search);
-            // if(!this.filterList || this.filterList.length == 0){
-            //     this.filterList = this.dataList.filter(this.search);
-            // }
-            // else {
-            //     this.filterList = this.filterList.filter(this.search);
-            // }
-        },
-        search(data){
-            if(ChosungSearch.isSearch(this.keyword, data.name, true)){//true : 띄어쓰기까지 고려
-                return true;
+            this.clearFilterList();
+            
+            const searcher = new Hangul.Searcher(this.kewyord);
+            for(let i=0; i < this.dataList.length; i++){
+                const idx = searcher.search(this.dataList[i]);
+                console.log("idx = " + idx);
+                if(idx >= 0) {
+                    this.filterList.append(this.dataList[i]);
+                }
             }
-            return false;
         },
         clearKeyword(){
             this.keyword = "";
@@ -87,7 +86,11 @@ export default {
         },
     },
     created(){
-        
+        //초성 배열을 별도로 준비
+        this.dataList.forEach(data=>{
+            const seperateArray = Hangul.disassemble(data.name);
+            this.chosungList.push(seperateArray);
+        });
     },
 }
 </script>

@@ -69,6 +69,16 @@ export default {
         this.itemList.push(...require("@/assets/json/weapon/stringed_instrument.json"));
         this.itemList.push(...require("@/assets/json/weapon/aether_key.json"));
         this.itemList.push(...require("@/assets/json/weapon/paint_rings.json"));
+
+        this.itemList.push(...require("@/assets/json/armor/cloth-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/cloth-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/leather-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/leather-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/chain-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/chain-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/plate-1.json"));
+        this.itemList.push(...require("@/assets/json/armor/plate-2.json"));
+        this.itemList.push(...require("@/assets/json/armor/shield.json"));
     },
 };
 </script>
