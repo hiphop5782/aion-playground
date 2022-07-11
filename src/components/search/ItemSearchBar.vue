@@ -26,12 +26,28 @@ export default {
             keyword:"",
             filterList:[],
             click:false,
-            chosungList:[],
+            filterLimit:20,
         };
     },
     watch:{
-        keyword:_.throttle(function(){
-            this.searchOperation();
+        keyword:_.throttle(function(after, before){
+            if(!after) {
+                this.clearKeyword();
+                return;
+            }
+            if(this.click){
+                this.click = false;
+                return;
+            }
+
+            //Hangul.search(after, before)가 0이면 검색어 입력중, -1이면 검색어 제거
+            
+            if(Hangul.search(after, before) == 0){
+                this.filterOperation();
+            }
+            else {
+                this.searchOperation();
+            }
         }, 350),
     },
     computed:{
@@ -43,23 +59,56 @@ export default {
     },
     methods:{
         searchOperation(){
-            if(!this.keyword) {
-                this.clearKeyword();
-                return;
-            }
-            if(this.click){
-                this.click = false;
-                return;
+            this.clearFilterList();
+
+            //검색어가 초성인 경우와 아닌 경우를 구분해서 처리
+            let count = 0;
+            for(let i=0; i < this.dataList.length; i++) {
+                const idx = Hangul.isConsonantAll(this.keyword) ?
+                                    Hangul.search(this.dataList[i].chosung, this.keyword)
+                                    :Hangul.search(this.dataList[i].name, this.keyword);
+
+                if(idx == 0) {
+                    this.filterList.push(this.dataList[i]);
+                    if(++count >= this.filterLimit) break;
+                }
             }
 
-            this.clearFilterList();
-            
-            const searcher = new Hangul.Searcher(this.kewyord);
-            for(let i=0; i < this.dataList.length; i++){
-                const idx = searcher.search(this.dataList[i]);
-                console.log("idx = " + idx);
-                if(idx >= 0) {
-                    this.filterList.append(this.dataList[i]);
+            if(count < this.filterLimit){
+                for(let i=0; i < this.dataList.length; i++) {
+                    const idx = Hangul.isConsonantAll(this.keyword) ?
+                                        Hangul.search(this.dataList[i].chosung, this.keyword)
+                                        :Hangul.search(this.dataList[i].name, this.keyword);
+
+                    if(idx > 0) {
+                        this.filterList.push(this.dataList[i]);
+                        if(++count >= this.filterLimit) break;
+                    }
+                }
+            }
+        },
+        filterOperation(){
+            this.filterList = this.filterList.filter((item)=>{
+                if(Hangul.isConsonantAll(this.keyword)) {
+                    return Hangul.search(item.chosung, this.keyword) >= 0;
+                }
+                else {
+                    return Hangul.search(item.name, this.keyword) >= 0;
+                }
+            });
+
+            if(this.filterList.length < this.filterLimit) {
+                let count = this.filterList.length;
+                for(let i=0; i < this.dataList.length; i++) {
+                    const idx = Hangul.isConsonantAll(this.keyword) ?
+                                        Hangul.search(this.dataList[i].chosung, this.keyword)
+                                        :Hangul.search(this.dataList[i].name, this.keyword);
+
+                    if(idx > 0) {
+                        this.filterList.push(this.dataList[i]);
+
+                        if(++count >= this.filterLimit) break;
+                    }
                 }
             }
         },
@@ -87,9 +136,12 @@ export default {
     },
     created(){
         //초성 배열을 별도로 준비
-        this.dataList.forEach(data=>{
-            const seperateArray = Hangul.disassemble(data.name);
-            this.chosungList.push(seperateArray);
+        this.dataList.forEach((data, index)=>{
+            data.index = index;
+            data.chosung = Hangul.d(data.name, true)
+                                                        .map(arr=>arr[0])
+                                                        .join("")
+                                                        .replace(" ", "");
         });
     },
 }
