@@ -19,11 +19,20 @@
   <router-view />
 
   <div class="spacer"></div>
+
+  <ajax-loader :loading="isLoading"></ajax-loader>
+
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+import AjaxLoaderVue from './components/fragment/AjaxLoader.vue';
+
   export default {
     name: 'App',
+    components:{
+      'ajax-loader':AjaxLoaderVue
+    },
     data(){
       return {
         menuList:[
@@ -35,15 +44,17 @@
         ],
       };
     },
+    computed:{
+      ...mapGetters([
+        'isLoading'
+      ]),
+    },
     methods:{
       
     },
-    components: {
-
-    },
     create() {
 
-    },
+    }
   }
 </script>
 
