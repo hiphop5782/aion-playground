@@ -3,10 +3,11 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         loading:false,
+        display:true,
     },
     getters: {
         isLoading(state){
-            return state.loading;
+            return state.display && state.loading;
         },
     },
     mutations: {
@@ -15,6 +16,12 @@ export default createStore({
         },
         loadingFinish(state){
             state.loading = false;
+        },
+        hide(state){
+            state.display = false;
+        },
+        show(state){
+            state.display = true;
         },
     }
 });

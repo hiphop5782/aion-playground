@@ -26,7 +26,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-import AjaxLoaderVue from './components/fragment/AjaxLoader.vue';
+  import AjaxLoaderVue from './components/fragment/AjaxLoader.vue';
 
   export default {
     name: 'App',
