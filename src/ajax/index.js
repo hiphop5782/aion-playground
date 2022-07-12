@@ -2,19 +2,10 @@
 import axios from 'axios';
 import store from '@/store';
 
-let requestFlag = false;
 axios.interceptors.request.use(
     config=>{
-        if(!requestFlag) {
-            requestFlag = true;
-            setTimeout(()=>{
-                if(requestFlag) {
-                    store.commit("loadingStart");
-                    requestFlag = false;
-                }
-            }, 500);
-        }
-        return config;
+        store.commit("loadingStart");
+        return config;        
     }, 
     error=>{
         store.commit("loadingFinish");

@@ -12,7 +12,6 @@
                 <character-search-bar @select-item="selectItem"></character-search-bar>
             </div>
         </div>
-
         <div class="row mt-4" v-if="user">
             <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
                 <a href="#" class="btn btn-outline-primary btn-lg align-bottom"
@@ -22,8 +21,16 @@
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom" v-if="user.guildName"
                     @click.prevent="goGuild(user.serverId, user.guildId);">{{user.guildName}}</a>
                 <a href="#" class="btn btn-outline-dark btn-small ms-1 align-bottom">{{userDetail.character_abyss.rankName}}</a>
-                <input type="checkbox" class="btn-check" autocomplete="off" id="btn-keepalive" v-model="keepAlive.active">
-                <label class="btn btn-outline-danger ms-1" for="btn-keepalive">실시간</label>
+                <div class="btn-group btn-group-toggle ms-1" data-toggle="buttons">
+                    <label class="btn btn-outline-danger" v-bind:class="{active:keepAlive.active}">
+                        <input type="checkbox" class="btn-check" autocomplete="off" id="btn-keepalive" v-model="keepAlive.active">
+                        <span class="sr-only" v-if="isLoading">Loading...</span>
+                        <span class="spinner-border spinner-border-sm ms-1" role="status" area-hidden="true" v-if="isLoading"></span>
+                        <span class="sr-only" v-else>
+                            실시간 {{keepAlive.active?"on":"off"}}
+                        </span>
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -158,6 +165,7 @@
 <script>
     import CharacterSearchBarVue from "./search/CharacterSearchBar.vue";
     import JumbotronHeaderVue from "./layout/JumbotronHeader.vue";
+    import { mapGetters } from "vuex";
 
     export default {
         name: "CharacterSearch",
@@ -179,7 +187,9 @@
             };
         },
         computed:{
-            
+            ...mapGetters([
+                'isLoading'
+            ]),
         },
         watch: {
             'keepAlive.active':{
@@ -394,11 +404,12 @@
                 this.keepAlive.handler = null;
             },
             async keepAliveProcess(){
+                console.log(this.user);
                 if(!this.user) {
                     this.disableKeepAliveProcess();
                     return;
                 }
-
+     
                 const [userDetailRequest] = await Promise.all([
                     this.$http.get(this.$host+"/userdetail/" + this.user.serverId + "/" + this.user.characterId),
                 ]);
@@ -409,6 +420,12 @@
         },
         created() {
             this.pvpStats = require("@/assets/json/pvp.json");
+        },
+        beforeUpdate(){
+            this.disableKeepAliveProcess();
+        },
+        beforeUnmount(){
+            this.disableKeepAliveProcess();
         },
     };
 </script>

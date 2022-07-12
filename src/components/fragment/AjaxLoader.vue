@@ -79,8 +79,8 @@
         right:0;
         bottom:0;
     }
-    .loader-wrapper > .v-spinner {
-        position: absolute !important;
+    .loader-wrapper > .v-spinner, v-spinner {
+        position: fixed !important;
         top:50%;
         left:50%;
         transform: translate(-50%, -50%);
