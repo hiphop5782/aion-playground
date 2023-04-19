@@ -1,6 +1,6 @@
 # 아이온놀이터
 
-[사이트로 이동하기](http://api.sysout.co.kr/aion)
+[사이트로 이동하기](https://aion.sysout.co.kr)
 
 ## 주요기능
 
