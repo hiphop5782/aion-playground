@@ -17,7 +17,7 @@ import axios from './ajax';
 const app = createApp(App);
 
 app.config.globalProperties.$http = axios;
-app.config.globalProperties.$host = "http://api.sysout.co.kr/ap";
+app.config.globalProperties.$host = "//www.sysout.co.kr/ap";
 
 app.component("font-awesome-icon", FontAwesomeIcon)
     .use(router)
